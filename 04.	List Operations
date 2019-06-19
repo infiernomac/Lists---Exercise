@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace List_Operations
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			List<long> numbers = Console.ReadLine().Split().Select(long.Parse).ToList();
+
+			while (true)
+			{
+				string[] commands = Console.ReadLine().Split().ToArray();
+
+				if (commands[0].Equals("End"))
+				{
+					break;
+				}
+				else if (commands[0].Equals("Add"))
+				{
+					numbers.Add(Convert.ToInt32(commands[1]));
+				}
+				else if (commands[0].Equals("Insert"))
+				{
+					int index = Convert.ToInt32(commands[2]);
+
+					if (index > numbers.Count || index < 0)
+					{
+						Console.WriteLine("Invalid index");
+					}
+					else if (index < numbers.Count )
+					{
+						numbers.Insert(index, Convert.ToInt64(commands[1]));
+					}
+					else
+					{
+						numbers.Add(Convert.ToInt32(commands[1]));
+					}
+				}
+				else if (commands[0].Equals("Remove"))
+				{
+					int index = Convert.ToInt32(commands[1]);
+
+					if (index >= numbers.Count || index < 0)
+					{
+						Console.WriteLine("Invalid index");
+					}
+					else
+					{
+						numbers.RemoveAt(index);
+					}	
+				}
+				else if (commands[0].Equals("Shift"))
+				{
+					if (numbers.Count > 0)
+					{
+
+						if (commands[1].Equals("left"))
+						{
+							int count = Convert.ToInt32(commands[2]);
+
+							long saveNumber = 0;
+
+							for (int i = 0; i < count; i++)
+							{
+								saveNumber = numbers[0];
+								numbers.RemoveAt(0);
+								numbers.Add(saveNumber);
+							}
+						}
+						else
+						{
+							int count = Convert.ToInt32(commands[2]);
+
+							long saveNumber = 0;
+
+							for (int i = 0; i < count; i++)
+							{
+								saveNumber = numbers[numbers.Count - 1];
+								numbers.RemoveAt(numbers.Count - 1);
+								numbers.Insert(0, saveNumber);
+							}
+						}
+					}
+				}
+			}
+
+			Console.WriteLine(string.Join(" ", numbers));
+		}
+	}
+}
