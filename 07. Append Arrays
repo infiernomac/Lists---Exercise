@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Append_Arrays
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			List<string> imput = Console.ReadLine().Split("|").ToList();
+
+			imput.Reverse();
+
+			string imputString = string.Join(" ", imput);
+
+			while (imputString.Contains("  ")) imputString = imputString.Replace("  ", " ");
+
+			Console.WriteLine(imputString);
+		}
+	}
+}
