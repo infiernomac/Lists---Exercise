@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Change_List
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+			while (true)
+			{
+				string[] imput = Console.ReadLine().Split();
+
+				if (imput[0].Equals("Delete"))
+				{
+					for (int i = 0; i < numbers.Count; i++)
+					{
+						int deleteNumber = Convert.ToInt32(imput[1]);
+
+						numbers.Remove(deleteNumber);
+					}
+				}
+				else if (imput[0].Equals("Insert"))
+				{
+					int listIndex = Convert.ToInt32(imput[2]);
+					int listElement = Convert.ToInt32(imput[1]);
+
+					numbers.Insert(listIndex, listElement);
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			Console.WriteLine(string.Join(" ", numbers));
+		}
+	}
+}
