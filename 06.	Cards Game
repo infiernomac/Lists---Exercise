@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace Cards_Game
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			List<int> firstHandCard = Console.ReadLine().Split().Select(int.Parse).ToList();
+			List<int> secondHandCard = Console.ReadLine().Split().Select(int.Parse).ToList();
+
+			int lastCard = 0;
+			int beforeLastCard = 0;
+
+			while (true)
+			{
+				if ((firstHandCard.Count).Equals(0))
+				{
+					Console.WriteLine($"Second player wins! Sum: {secondHandCard.Sum()}");
+					break;
+				}
+
+				if ((secondHandCard.Count).Equals(0))
+				{
+					Console.WriteLine($"First player wins! Sum: {firstHandCard.Sum()}");
+					break;
+				}
+
+				if (firstHandCard[0] > secondHandCard[0])
+				{
+					lastCard = secondHandCard[0];
+					beforeLastCard = firstHandCard[0];
+					firstHandCard.RemoveAt(0);
+					firstHandCard.Add(beforeLastCard);
+					firstHandCard.Add(lastCard);
+					secondHandCard.RemoveAt(0);
+				}
+				else if (secondHandCard[0] > firstHandCard[0])
+				{
+					lastCard = firstHandCard[0];
+					beforeLastCard = secondHandCard[0];
+					secondHandCard.RemoveAt(0);
+					secondHandCard.Add(beforeLastCard);
+					secondHandCard.Add(lastCard);
+					firstHandCard.RemoveAt(0);
+				}
+				else
+				{
+					firstHandCard.RemoveAt(0);
+					secondHandCard.RemoveAt(0);
+				}
+			}
+		}
+	}
+}
