@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace House_Party
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			int command = int.Parse(Console.ReadLine());
+
+			List<string> guestList = new List<string>();
+
+			for (int i = 0; i < command; i++)
+			{
+				string[] guest = Console.ReadLine().Split().ToArray();
+
+				bool inList = false;
+
+				if ((guest.Length).Equals(3))
+				{
+					if (guestList.Count.Equals(0))
+					{
+						guestList.Add(guest[0]);
+						continue;
+					}
+
+					for (int a = 0; a < guestList.Count; a++)
+					{
+						if (guest[0].Equals(guestList[a]))
+						{
+							inList = true;
+						}
+					}
+
+					if (inList)
+					{
+						Console.WriteLine($"{guest[0]} is already in the list!");
+					}
+					else
+					{
+						guestList.Add(guest[0]);
+					}
+				}
+				else
+				{
+					bool remove = false;
+					for (int a = 0; a < guestList.Count; a++)
+					{
+						if (guest[0].Equals(guestList[a]))
+						{
+							guestList.Remove(guest[0]);
+							remove = true;
+						}
+					}
+
+					if (!remove)
+					{
+						Console.WriteLine($"{guest[0]} is not in the list!");
+					}
+
+				}
+			}
+
+			foreach (var item in guestList)
+			{
+				Console.WriteLine(item);
+			}
+		}
+	}
+}
