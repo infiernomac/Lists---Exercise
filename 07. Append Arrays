@@ -14,7 +14,10 @@ namespace Append_Arrays
 
 			string imputString = string.Join(" ", imput);
 
-			while (imputString.Contains("  ")) imputString = imputString.Replace("  ", " ");
+			while (imputString.Contains("  "))
+            {
+              imputString = imputString.Replace("  ", " ");
+            }
 
 			Console.WriteLine(imputString);
 		}
